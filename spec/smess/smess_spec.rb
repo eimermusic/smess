@@ -36,6 +36,37 @@ describe Smess do
       expect(Smess.config.debug).to be_true
       Smess.reset_config
       expect(Smess.config.debug).to be_false
+
+    end
+
+    it "can add a country code" do
+      Smess.configure do |config|
+        config.add_country_code(99, "twilio")
+      end
+      expect(Smess.config.output_by_country_code["99"]).to eq(:twilio)
+    end
+
+    it "can add a country code without specifying the output" do
+      Smess.configure do |config|
+        config.add_country_code("99")
+      end
+      expect(Smess.config.output_by_country_code["99"]).to eq(Smess.config.default_output)
+    end
+
+    it "raises when given a non-numeric country code" do
+      expect{
+        Smess.configure do |config|
+          config.add_country_code("hello")
+        end
+      }.to raise_error
+    end
+
+    it "raises when given an unknown output" do
+      expect{
+        Smess.configure do |config|
+          config.add_country_code("99", :hello)
+        end
+      }.to raise_error
     end
 
   end
