@@ -19,23 +19,23 @@ describe Smess do
 
   describe "Config behavior" do
     it "reads config defaults" do
-      expect(Smess.config.debug).to be_false
+      expect(Smess.config.nothing).to be_false
     end
 
     it "reads changed config values" do
       Smess.configure do |config|
-        config.debug = true
+        config.nothing = true
       end
-      expect(Smess.config.debug).to be_true
+      expect(Smess.config.nothing).to be_true
     end
 
     it "can reset config back to defaults" do
       Smess.configure do |config|
-        config.debug = true
+        config.nothing = true
       end
-      expect(Smess.config.debug).to be_true
+      expect(Smess.config.nothing).to be_true
       Smess.reset_config
-      expect(Smess.config.debug).to be_false
+      expect(Smess.config.nothing).to be_false
 
     end
 
