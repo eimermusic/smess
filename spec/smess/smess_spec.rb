@@ -39,6 +39,25 @@ describe Smess do
 
     end
 
+
+    it "can register an output" do
+      name = :twilio1
+      country_codes = ["1", "46"]
+      type = :twilio
+      config = {
+        sid: "AC9bdf5015d8acd1b5f8d4ab92ff001087",
+        auth_token: "6a4f328099ed622a704b5a843e9e03af",
+        from: "18779597784",
+        callback_url: "https://gateway.tricefy.com/mobile_gate/sms_report/from/twilio"
+      }
+
+      Smess.configure do |config|
+        config.register_output(name, country_codes, type, config)
+      end
+      expect(Smess.config.outputs).to include(:twilio1)
+    end
+
+
     it "can add a country code" do
       Smess.configure do |config|
         config.add_country_code(99, "twilio")
