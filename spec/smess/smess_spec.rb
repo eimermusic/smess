@@ -13,11 +13,30 @@ describe Smess do
     it "returns a populated Sms when mobule macro is invoked" do
       sms.class.should == Smess::Sms
       sms.to.should == '46701234567'
-      sms.output.should == 'test'
+      sms.output.should == :test
     end
   end
 
   describe "Config behavior" do
+
+    let(:twilio_options) {
+      {
+        name: :twilio1,
+        country_codes: ["1", "46"],
+        type: :twilio,
+        config: {
+          sid: "AC9bdf5015d8acd1b5f8d4ab92ff001087",
+          auth_token: "6a4f328099ed622a704b5a843e9e03af",
+          from: "18779597784",
+          callback_url: "https://gateway.tricefy.com/mobile_gate/sms_report/from/twilio"
+        }
+      }
+    }
+
+    before(:each) {
+      Smess.reset_config
+    }
+
     it "reads config defaults" do
       expect(Smess.config.nothing).to be_false
     end
@@ -41,18 +60,8 @@ describe Smess do
 
 
     it "can register an output" do
-      name = :twilio1
-      country_codes = ["1", "46"]
-      type = :twilio
-      config = {
-        sid: "AC9bdf5015d8acd1b5f8d4ab92ff001087",
-        auth_token: "6a4f328099ed622a704b5a843e9e03af",
-        from: "18779597784",
-        callback_url: "https://gateway.tricefy.com/mobile_gate/sms_report/from/twilio"
-      }
-
       Smess.configure do |config|
-        config.register_output(name, country_codes, type, config)
+        config.register_output(twilio_options)
       end
       expect(Smess.config.outputs).to include(:twilio1)
     end
@@ -60,12 +69,19 @@ describe Smess do
 
     it "can add a country code" do
       Smess.configure do |config|
-        config.add_country_code(99, "twilio")
+        config.register_output(twilio_options)
       end
-      expect(Smess.config.output_by_country_code["99"]).to eq(:twilio)
+      Smess.configure do |config|
+        config.add_country_code(99, twilio_options[:name])
+      end
+      expect(Smess.config.output_by_country_code["99"]).to eq(twilio_options[:name])
     end
 
     it "can add a country code without specifying the output" do
+      Smess.configure do |config|
+        config.default_output = twilio_options[:name]
+        config.register_output(twilio_options)
+      end
       Smess.configure do |config|
         config.add_country_code("99")
       end
