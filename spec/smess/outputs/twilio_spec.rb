@@ -38,7 +38,7 @@ describe Smess::Twilio, iso_id: "7.2.4" do
 
   it 'generates correct data for a single message' do
     request = nil
-    subject.stub(:create_client_message) { |data|
+    allow(subject).to receive(:create_client_message) { |data|
       request = data
     }
     subject.deliver
@@ -49,7 +49,7 @@ describe Smess::Twilio, iso_id: "7.2.4" do
 
   it 'returns a response for an exception' do
     request = nil
-    subject.stub(:create_client_message) { |data|
+    allow(subject).to receive(:create_client_message) { |data|
       raise "Hell"
     }
     results = subject.deliver

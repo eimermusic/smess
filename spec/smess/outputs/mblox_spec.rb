@@ -38,7 +38,7 @@ describe Smess::Mblox, iso_id: "7.2.8" do
 
   it 'calls the correct http endpoint' do
     request = nil
-    HTTPI.stub(:post) { |r|
+    allow(HTTPI).to receive(:post) { |r|
       request = r
       response = HTTPI::Response.new(200, [], "")
     }
@@ -48,7 +48,7 @@ describe Smess::Mblox, iso_id: "7.2.8" do
 
   it 'sets correct content type' do
     request = nil
-    HTTPI.stub(:post) { |r|
+    allow(HTTPI).to receive(:post) { |r|
       request = r
       response = HTTPI::Response.new(200, [], "")
     }
@@ -58,10 +58,10 @@ describe Smess::Mblox, iso_id: "7.2.8" do
 
   it 'generates correct xml data for a single message' do
     xml_data = nil
-    HTTPI.stub(:post) { |r|
+    allow(HTTPI).to receive(:post) { |r|
       response = HTTPI::Response.new(200, [], "")
     }
-    subject.stub(:xml_data_for) { |xml_params|
+    allow(subject).to receive(:xml_data_for) { |xml_params|
       xml_data = subject.hash_data_for(xml_params)
       '<?xml version="1.0"?><nothing></nothing>'
     }
@@ -78,12 +78,12 @@ describe Smess::Mblox, iso_id: "7.2.8" do
 
   it 'generates correct udh data for a long concatenated message' do
     xml_datas = []
-    HTTPI.stub(:post) { |r|
+    allow(HTTPI).to receive(:post) { |r|
       response = HTTPI::Response.new(200, [], "")
     }
     subject2 = described_class.new(config)
     subject2.sms = concat_sms
-    subject2.stub(:xml_data_for) { |xml_params|
+    allow(subject2).to receive(:xml_data_for) { |xml_params|
       xml_datas << subject2.hash_data_for(xml_params)
       '<?xml version="1.0"?><nothing></nothing>'
     }

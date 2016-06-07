@@ -14,7 +14,7 @@ Gem::Specification.new do |s|
   s.homepage = "https://github.com/eimermusic/smess"
   s.license = 'MIT'
 
-  s.add_development_dependency 'rspec', '>= 2.4.0'
+  s.add_development_dependency 'rspec', '>= 3.4.0'
   s.add_development_dependency 'simplecov'
   s.add_development_dependency 'dotenv'
   s.add_dependency 'mail'

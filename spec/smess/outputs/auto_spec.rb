@@ -136,14 +136,14 @@ describe Smess::Auto, iso_id: "7.2.1" do
 
     it 'asks for an output class for msisdn and calls deliver on it' do
       subject.output_name = :test
-      subject.stub(:output_for) { |msisdn|
+      allow(subject).to receive(:output_for) do |msisdn|
         output = Smess::Test.new({})
         output.sms = sms
         output
-      }
+      end
       result = subject.deliver
-      Smess::Test.instance.sms.should == sms
-      result[:sent_with].should == :test
+      expect(Smess::Test.instance.sms).to eq(sms)
+      expect(result[:sent_with]).to eq(:test)
     end
 
   end
