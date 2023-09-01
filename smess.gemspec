@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'clickatell', '~> 0'
   s.add_dependency 'activesupport', '>= 5.2.6', '< 7.1.0'
   s.add_dependency 'twilio-ruby', '~> 6.2'
-  s.add_dependency 'activesupport', '>= 5.2.6', '< 7.0.0'
 
   s.files = Dir["{lib}/**/*", "[A-Z]*", "init.rb"]
   s.required_ruby_version = ">= 2.0.0"
