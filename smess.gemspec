@@ -1,4 +1,4 @@
-$:.push File.expand_path("../lib", __FILE__)
+$:.push File.expand_path("../lib", __dir__)
 require "smess/version"
 
 Gem::Specification.new do |s|
@@ -23,6 +23,6 @@ Gem::Specification.new do |s|
   s.add_dependency 'activesupport', '>= 5.2.6', '< 8.0.0'
 
   s.files = Dir["{lib}/**/*", "[A-Z]*", "init.rb"]
-  s.required_ruby_version = ">= 2.0.0"
+  s.required_ruby_version = ">= 3.0.0"
   s.required_rubygems_version = ">= 1.3.7"
 end
