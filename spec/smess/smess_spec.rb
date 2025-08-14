@@ -11,9 +11,9 @@ describe Smess do
       )
     }
     it "returns a populated Sms when mobule macro is invoked" do
-      sms.class.should == Smess::Sms
-      sms.to.should == '46701234567'
-      sms.output.should == :test
+      expect(sms.class).to eq(Smess::Sms)
+      expect(sms.to).to eq('46701234567')
+      expect(sms.output).to eq(:test)
     end
   end
 
@@ -94,7 +94,7 @@ describe Smess do
         Smess.configure do |config|
           config.add_country_code("hello")
         end
-      }.to raise_error
+      }.to raise_error(ArgumentError, "Invalid country code")
     end
 
     it "raises when given an unknown output" do
@@ -102,7 +102,7 @@ describe Smess do
         Smess.configure do |config|
           config.add_country_code("99", :hello)
         end
-      }.to raise_error
+      }.to raise_error(ArgumentError, "Unknown output specified")
     end
 
   end

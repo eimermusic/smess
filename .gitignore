@@ -19,3 +19,4 @@ doc/
 Gemfile.lock
 .env.development
 .DS_Store
+.idea/*

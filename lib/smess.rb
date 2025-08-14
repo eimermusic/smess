@@ -1,27 +1,24 @@
 # coding: UTF-8
-smess_path = File.expand_path('.', File.dirname(__FILE__))
-$:.unshift(smess_path) if File.directory?(smess_path) && !$:.include?(smess_path)
-
 require 'active_support'
 require 'active_support/core_ext'
 
-require "smess/version"
-require 'smess/logging'
-require 'smess/output'
-require 'smess/utils'
-require 'smess/sms'
-require 'smess/outputs/http_base'
-require 'smess/outputs/auto'
-require 'smess/outputs/card_board_fish'
-require 'smess/outputs/clickatell'
-require 'smess/outputs/smsglobal'
-require 'smess/outputs/global_mouth'
-require 'smess/outputs/link_mobility'
-require 'smess/outputs/twilio'
-require 'smess/outputs/twilio_whatsapp'
-require 'smess/outputs/test'
+require_relative "smess/version"
+require_relative 'smess/logging'
+require_relative 'smess/output'
+require_relative 'smess/utils'
+require_relative 'smess/sms'
+require_relative 'smess/outputs/http_base'
+require_relative 'smess/outputs/auto'
+require_relative 'smess/outputs/card_board_fish'
+require_relative 'smess/outputs/clickatell'
+require_relative 'smess/outputs/smsglobal'
+require_relative 'smess/outputs/global_mouth'
+require_relative 'smess/outputs/link_mobility'
+require_relative 'smess/outputs/twilio'
+require_relative 'smess/outputs/twilio_whatsapp'
+require_relative 'smess/outputs/test'
 
-require 'string_ext'
+require_relative 'string_ext'
 
 module Smess
 
