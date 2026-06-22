@@ -19,7 +19,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'dotenv'
   s.add_dependency 'httpi', '>=4', '~> 4.0'
   s.add_dependency 'clickatell', '~> 0'
-  s.add_dependency 'twilio-ruby', '~> 6.2'
+  s.add_dependency 'twilio-ruby', '~> 7.10'
   s.add_dependency 'activesupport', '>= 5.2.6', '< 9.0.0'
 
   s.files = Dir["{lib}/**/*", "[A-Z]*", "init.rb"].reject { |f| f.match(%r{^(test|spec|features)/}) || f.end_with?('.gem') }
